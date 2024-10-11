@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+    backend:
+        restart: always
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
+        volumes:
+            - .:/app
+        environment:
+            DATABASE_URL: postgres
+            DATABASE_NAME: simple_tasks
+            DATABASE_USER: tasks_user
+            DATABASE_PASS: tasks_password
+            DATABASE_PORT: 5432
+            REDIS_URL: redis
+            BROKER_URL: rabbitmq
+            DJANGO_DEBUG: 'false'
+    server:
+        restart: always
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile.server
+        #volumes:
+        #    - .:/app
+        environment:
+            DATABASE_URL: postgres
+            DATABASE_NAME: simple_tasks
+            DATABASE_USER: tasks_user
+            DATABASE_PASS: tasks_password
+            DATABASE_PORT: 5432
+            REDIS_URL: redis
+            BROKER_URL: rabbitmq
+            DJANGO_DEBUG: 'false'

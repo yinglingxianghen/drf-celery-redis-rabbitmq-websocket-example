@@ -1,0 +1,6 @@
+/staticfiles
+/django_static
+/media
+
+db.sqlite3
+
